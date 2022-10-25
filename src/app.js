@@ -4,7 +4,7 @@ const methodOverride = require("method-override");
 const route = require("./routes");
 const path = require("path");
 const properties = require("./config/connect/properties");
-const port = properties.PORT || 8080;
+const port = 4000;
 const db = require("./config/db");
 const dotenv = require("dotenv");
 dotenv.config();
