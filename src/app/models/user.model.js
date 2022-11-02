@@ -8,6 +8,12 @@ const UserSchema = new Schema(
     username: { type: String, maxLength: 50, require: true },
     password: { type: String, require: true },
     status: { type: Boolean, default: 1 },
+    email: {
+      type: String,
+      trim: true,
+      lowercase: true,
+      unique: true,
+    },
   },
   {
     _id: false,
