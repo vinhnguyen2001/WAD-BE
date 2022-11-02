@@ -1,5 +1,5 @@
-// const Users = require("../../models/user.model");
 const userService = require("../../services/users.service");
+const { createToken } = require("../../middleware/jwt");
 
 module.exports = {
   // [GET]
@@ -45,12 +45,14 @@ module.exports = {
     try {
       const { username, password } = req.body;
       const result = await userService.authentication({ username, password });
+
       return res.json(result);
     } catch (error) {
       console.error(error);
-      res
-        .status(400)
-        .json({ status: "failure", res_message: "Authentication failure" });
+      res.status(400).json({
+        status: "failure",
+        res_message: "Authentication failure",
+      });
     }
   },
 };

@@ -1,5 +1,6 @@
 const bcrypt = require("bcrypt");
 const Users = require("../models/user.model");
+const { createToken } = require("../middleware/jwt");
 
 module.exports = {
   findAll: async () => {
@@ -67,12 +68,17 @@ module.exports = {
       return { status: "failure", res_message: "Password is incorrect" };
     }
 
-    delete account[0].password;
+    account[0].password = null;
 
+    const token = createToken({
+      username: account[0].username,
+      id: account[0].id,
+    });
     return {
       status: "success",
       res_message: "Authentication success",
       data: account,
+      token: token,
     };
   },
 };
